@@ -8,10 +8,23 @@
         android:id="@+id/mainScreenFragment"
         android:name="com.luck.ignatius.stockimageshopping.MainScreenFragment"
         android:label="MainScreenFragment"
-        tools:layout="@layout/activity_main"/>
+        tools:layout="@layout/fragment_main_screen">
+        <action
+            android:id="@+id/action_mainScreenFragment_to_loginScreenFragment"
+            app:destination="@id/loginScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginScreenFragment"
         android:name="com.luck.ignatius.stockimageshopping.LoginScreenFragment"
         android:label="LoginScreenFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginScreenFragment_to_registerScreenFragment"
+            app:destination="@id/registerScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerScreenFragment"
+        android:name="com.luck.ignatius.stockimageshopping.RegisterScreenFragment"
+        android:label="RegisterScreenFragment"
+        tools:layout="@layout/fragment_register_screen"/>
 </navigation>
