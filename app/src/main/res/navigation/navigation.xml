@@ -6,12 +6,16 @@
 
     <fragment
         android:id="@+id/mainScreenFragment"
-        android:name="com.luck.ignatius.stockimageshopping.MainScreenFragment"
+        android:name="com.luck.ignatius.stockimageshopping.mainscreen.MainScreenFragment"
         android:label="MainScreenFragment"
         tools:layout="@layout/fragment_main_screen">
         <action
             android:id="@+id/action_mainScreenFragment_to_loginScreenFragment"
-            app:destination="@id/loginScreenFragment" />
+            app:destination="@id/loginScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/loginScreenFragment"
@@ -20,11 +24,21 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginScreenFragment_to_registerScreenFragment"
-            app:destination="@id/registerScreenFragment" />
+            app:destination="@id/registerScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/registerScreenFragment"
         android:name="com.luck.ignatius.stockimageshopping.RegisterScreenFragment"
         android:label="RegisterScreenFragment"
-        tools:layout="@layout/fragment_register_screen"/>
+        tools:layout="@layout/fragment_register_screen">
+        <action
+            android:id="@+id/action_registerScreenFragment_to_loginScreenFragment"
+            app:destination="@id/loginScreenFragment"
+            app:popUpTo="@id/loginScreenFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

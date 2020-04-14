@@ -2,7 +2,6 @@ package com.luck.ignatius.stockimageshopping
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
 import com.luck.ignatius.stockimageshopping.databinding.FragmentLoginBinding
 
 class LoginScreenFragment: Fragment() {
@@ -23,7 +20,6 @@ class LoginScreenFragment: Fragment() {
             val password = binding.passwordEditText.text.toString()
             if (email != "" || password != "") {
                 if (email == sharedPreferences!!.getString("$email+loginEmail", "loh")) {
-                    //Log.i("email", sharedPreferences.getString())
                     if (password == sharedPreferences.getString("$email+loginPassword", "loh")) {
                         Toast.makeText(context, "Logged in :)))", Toast.LENGTH_LONG).show()
                     } else Toast.makeText(context, "Error! Wrong email or password", Toast.LENGTH_LONG).show()
