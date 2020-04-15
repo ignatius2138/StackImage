@@ -21,13 +21,15 @@ class MainScreenFragment: Fragment() {
             R.layout.fragment_main_screen, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.imagesGrid.adapter = ImageGridAdapter()
+        setHasOptionsMenu(true)
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-    }
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu,menu)

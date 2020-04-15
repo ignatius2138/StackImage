@@ -23,9 +23,9 @@ class MainScreenViewModel: ViewModel(){
     val response: LiveData<String>
         get() = _response
 
-    private val _image = MutableLiveData<Preview1000>()
-    val image: LiveData<Preview1000>
-        get() = _image
+    private val _images = MutableLiveData<List<Data>>()
+    val images: LiveData<List<Data>>
+        get() = _images
 
     init {
         getImages()
@@ -37,7 +37,7 @@ class MainScreenViewModel: ViewModel(){
             try {
                 val result = getImagesDeferred.await()
                 if (result.data.isNotEmpty()) {
-                    _image.value = result.data[0].assets.preview_1000
+                    _images.value = result.data
                     Log.i("url", result.data[0].assets.preview_1000.url)
                 }
             }catch (t: Throwable) {

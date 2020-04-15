@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.luck.ignatius.stockimageshopping.network.Data" />
+    </data>
+
+    <ImageView
+        android:id="@+id/stockImageView"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:adjustViewBounds="true"
+        android:padding="2dp"
+        android:scaleType="centerCrop"
+        app:imageUrl="@{data.component2().component1().url}"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:contentDescription="@string/image_description" />
+</layout>
