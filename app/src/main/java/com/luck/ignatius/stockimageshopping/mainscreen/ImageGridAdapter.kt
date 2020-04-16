@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.luck.ignatius.stockimageshopping.databinding.RecyclerViewItemBinding
 import com.luck.ignatius.stockimageshopping.network.Data
 
-class ImageGridAdapter: ListAdapter<Data, ImageGridAdapter.ImageViewHolder>(DiffCallback) {
+class ImageGridAdapter(private val onClickListener: OnClickListener): ListAdapter<Data, ImageGridAdapter.ImageViewHolder>(DiffCallback) {
 
     class ImageViewHolder(private var binding: RecyclerViewItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Data) {
@@ -34,7 +34,14 @@ class ImageGridAdapter: ListAdapter<Data, ImageGridAdapter.ImageViewHolder>(Diff
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val data = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(data)
+        }
         holder.bind(data)
+    }
+
+    class OnClickListener(val clickListener: (data: Data) -> Unit) {
+        fun onClick(data: Data) = clickListener(data)
     }
 
 }

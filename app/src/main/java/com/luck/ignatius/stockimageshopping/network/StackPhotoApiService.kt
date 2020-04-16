@@ -12,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.shutterstock.com/v2/"
 private const val USER_NAME = "YqhShgqoNg9f0zcLU4dmTCSEA1hLPwzp"

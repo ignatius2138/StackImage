@@ -15,17 +15,18 @@ enum class StackPhotoApiStatus {LOADING, ERROR, DONE}
 class MainScreenViewModel: ViewModel(){
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
     private val _status = MutableLiveData<StackPhotoApiStatus>()
     val status: LiveData<StackPhotoApiStatus>
         get() = _status
 
-    private val _response = MutableLiveData<String>()
-    val response: LiveData<String>
-        get() = _response
-
     private val _images = MutableLiveData<List<Data>>()
     val images: LiveData<List<Data>>
         get() = _images
+
+    private val _navigateToSelectedImage = MutableLiveData<Data>()
+    val navigateToSelectedImage: LiveData<Data>
+        get() = _navigateToSelectedImage
 
     init {
         getImages()
@@ -35,16 +36,27 @@ class MainScreenViewModel: ViewModel(){
         coroutineScope.launch {
             val getImagesDeferred = StackPhotoApi.retrofitService.getImages()
             try {
+                _status.value = StackPhotoApiStatus.LOADING
                 val result = getImagesDeferred.await()
+                _status.value = StackPhotoApiStatus.DONE
                 if (result.data.isNotEmpty()) {
                     _images.value = result.data
                     Log.i("url", result.data[0].assets.preview_1000.url)
                 }
             }catch (t: Throwable) {
-                _response.value = "Failure: " + t.message
+                _status.value = StackPhotoApiStatus.ERROR
+                _images.value = ArrayList()
             }
 
         }
+    }
+
+    fun displayImageDetails(data: Data) {
+        _navigateToSelectedImage.value = data
+    }
+
+    fun displayImageDetailsComplete(){
+        _navigateToSelectedImage.value = null
     }
 
     override fun onCleared() {

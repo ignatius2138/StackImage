@@ -10,12 +10,8 @@
         android:label="MainScreenFragment"
         tools:layout="@layout/fragment_main_screen">
         <action
-            android:id="@+id/action_mainScreenFragment_to_loginScreenFragment"
-            app:destination="@id/loginScreenFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_mainScreenFragment_to_detailsScreenFragment"
+            app:destination="@id/detailsScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginScreenFragment"
@@ -40,5 +36,14 @@
             app:destination="@id/loginScreenFragment"
             app:popUpTo="@id/loginScreenFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsScreenFragment"
+        android:name="com.luck.ignatius.stockimageshopping.detailesscreen.DetailsScreenFragment"
+        android:label="DetailsScreenFragment"
+        tools:layout="@layout/fragment_detailed_screen">
+        <argument
+            android:name="selectedImage"
+            app:argType="com.luck.ignatius.stockimageshopping.network.Data"/>
     </fragment>
 </navigation>
