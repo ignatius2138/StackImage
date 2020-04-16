@@ -9,51 +9,73 @@
             type="com.luck.ignatius.stockimageshopping.detailesscreen.DetailsScreenViewModel" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray"
+        android:padding="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/main_photo_image"
+            android:layout_width="0dp"
+            android:layout_height="266dp"
+            android:contentDescription="@string/detailed_photo_description"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{viewModel.selectedData.component2().component1().url}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/descriptionTextVew"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_marginTop="20dp"
+            android:text="@{`Description: ` + viewModel.selectedData.component4()}"
+            android:textColor="@color/half_white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_type"
+            tools:text="Description" />
 
-            <ImageView
-                android:id="@+id/main_photo_image"
-                android:layout_width="0dp"
-                android:layout_height="266dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:imageUrl="@{viewModel.selectedData.component2().component1().url}"
-                tools:src="@tools:sample/backgrounds/scenic"
-                android:contentDescription="@string/detailed_photo_description" />
+        <TextView
+            android:id="@+id/image_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@{`Image type: ` + viewModel.selectedData.component7()}"
+            android:textColor="@color/half_white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_photo_image"
+            tools:text="Picture" />
 
-            <TextView
-                android:id="@+id/descriptionTextVew"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="#de000000"
-                android:textSize="20sp"
-                android:text="@{viewModel.selectedData.component4()}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_photo_image"
-                tools:text="To Rent" />
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Price: 25$"
+            android:textColor="@color/half_white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_photo_image"
+            tools:text="25$" />
 
-            <TextView
-                android:id="@+id/image_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="#de000000"
-                android:textSize="20sp"
-                android:text="@{viewModel.selectedData.component7()}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionTextVew"
-                tools:text="$100,000" />
+        <Button
+            android:id="@+id/buyButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/buy_picture_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionTextVew"
+            app:layout_constraintVertical_bias="1.0" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

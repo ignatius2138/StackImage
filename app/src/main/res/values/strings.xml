@@ -4,4 +4,5 @@
     <string name="preference_file_key">StackImage prefs</string>
     <string name="image_description">image</string>
     <string name="detailed_photo_description">Detailed Photo</string>
+    <string name="buy_picture_text">Buy Picture</string>
 </resources>

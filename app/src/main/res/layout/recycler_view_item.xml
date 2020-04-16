@@ -10,14 +10,25 @@
             type="com.luck.ignatius.stockimageshopping.network.Data" />
     </data>
 
-    <ImageView
-        android:id="@+id/stockImageView"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:padding="2dp"
-        android:scaleType="centerCrop"
-        app:imageUrl="@{data.component2().component1().url}"
-        tools:src="@tools:sample/backgrounds/scenic"
-        android:contentDescription="@string/image_description" />
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/stockImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_description"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{data.component2().component1().url}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+    </androidx.cardview.widget.CardView>
+
 </layout>
