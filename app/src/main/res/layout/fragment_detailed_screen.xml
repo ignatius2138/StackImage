@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Price: 25$"
+            android:text="@{viewModel.selectedData.component6() + ` $`}"
             android:textColor="@color/half_white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,12 +65,13 @@
             tools:text="25$" />
 
         <Button
-            android:id="@+id/buyButton"
+            android:id="@+id/addToCartButton"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="@string/buy_picture_text"
+            android:text="@string/add_to_cart_text"
+            android:onClick="@{() -> viewModel.addItemToCart()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
