@@ -18,14 +18,19 @@ class DetailsScreenViewModel(val data: Data, app: Application, private val dataS
     val selectedData: LiveData<Data>
         get() = _selectedData
 
+    private var _showSnackbarEvent = MutableLiveData<Boolean>()
+    val showSnackBarEvent: LiveData<Boolean>
+        get() = _showSnackbarEvent
+
     init {
         _selectedData.value = data
     }
 
     fun addItemToCart() {
         uiScope.launch {
-            val newCartItem = CartTable(url = data.assets.small_thumb.url, description = data.description, price = data.id.toInt()/10000000)
+            val newCartItem = CartTable(url = data.assets.small_thumb.url, description = data.description, price = data.id.toInt()/100000000)
             insert(newCartItem)
+            _showSnackbarEvent.value = true
         }
     }
 
@@ -34,6 +39,10 @@ class DetailsScreenViewModel(val data: Data, app: Application, private val dataS
             dataSource.insert(newCartItem)
             Log.i("insert", newCartItem.toString())
         }
+    }
+
+    fun doneShowingSnackbar() {
+        _showSnackbarEvent.value = false
     }
 
     override fun onCleared() {

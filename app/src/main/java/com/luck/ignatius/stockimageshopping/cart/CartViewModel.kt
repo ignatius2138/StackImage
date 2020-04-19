@@ -6,5 +6,5 @@ import com.luck.ignatius.stockimageshopping.database.CartTableDao
 import com.luck.ignatius.stockimageshopping.database.StackImageDatabase
 
 class CartViewModel(val database: CartTableDao, application: Application): AndroidViewModel(application) {
-
+    val cartItems = database.getAllCartItems()
 }

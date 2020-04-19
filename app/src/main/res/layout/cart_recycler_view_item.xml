@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="data"
-            type="com.luck.ignatius.stockimageshopping.network.Data" />
+            name="cartItem"
+            type="com.luck.ignatius.stockimageshopping.database.CartTable" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -17,6 +17,7 @@
         app:cardElevation="2dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -28,42 +29,49 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_connection_error"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/desciptionTextView"
-                android:layout_width="wrap_content"
+                android:id="@+id/descriptionTextViewRecycler"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cartItemImageView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Description" />
 
             <TextView
-                android:id="@+id/priceTextView"
+                android:id="@+id/priceTextViewRecycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginBottom="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cartItemImageView"
+                app:layout_constraintTop_toTopOf="@+id/deleteButton"
                 tools:text="Price: 25 $" />
 
             <Button
                 android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
+                android:text="Delete Item"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Delete Item" />
+                app:layout_constraintTop_toBottomOf="@+id/descriptionTextViewRecycler"
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
