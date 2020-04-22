@@ -1,6 +1,7 @@
 package com.luck.ignatius.stockimageshopping.detailesscreen
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -13,6 +14,7 @@ import kotlinx.coroutines.*
 class DetailsScreenViewModel(val data: Data, app: Application, private val dataSource: CartTableDao): AndroidViewModel(app){
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val sharedPreferences = app.getSharedPreferences("MainActivity", Context.MODE_PRIVATE)!!
 
     private val _selectedData = MutableLiveData<Data>()
     val selectedData: LiveData<Data>
@@ -28,7 +30,7 @@ class DetailsScreenViewModel(val data: Data, app: Application, private val dataS
 
     fun addItemToCart() {
         uiScope.launch {
-            val newCartItem = CartTable(url = data.assets.small_thumb.url, description = data.description, price = data.id.toInt()/100000000)
+            val newCartItem = CartTable(url = data.assets.huge_thumb.url, description = data.description, price = data.id.toInt()/100000000, accountName = sharedPreferences.getString("accountName", "not logged in")!!)
             insert(newCartItem)
             _showSnackbarEvent.value = true
         }

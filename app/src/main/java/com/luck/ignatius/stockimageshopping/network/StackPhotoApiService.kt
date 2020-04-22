@@ -31,7 +31,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface StackPhotoApiService {
-    @GET("images/search")
+    @GET("images/search?sort=random")
     fun getImages(): Deferred<Image>
 }
 

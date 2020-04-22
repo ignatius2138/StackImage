@@ -2,21 +2,20 @@ package com.luck.ignatius.stockimageshopping.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.luck.ignatius.stockimageshopping.database.CartTable
 import com.luck.ignatius.stockimageshopping.databinding.CartRecyclerViewItemBinding
 
-class CartListAdapter: ListAdapter<CartTable, CartListAdapter.ViewHolder>(CartListDiffCallback()) {
+class CartListAdapter(val clickListener: CartItemListener): ListAdapter<CartTable, CartListAdapter.ViewHolder>(CartListDiffCallback()) {
 
     class ViewHolder private constructor(val binding: CartRecyclerViewItemBinding): RecyclerView.ViewHolder(binding.root){
-        val cartItemImage: ImageView = binding.cartItemImageView
 
-        fun bind(item: CartTable) {
-            binding.descriptionTextViewRecycler.text = item.description
-            binding.priceTextViewRecycler.text = "Price: " + item.price + " $"
+        fun bind(item: CartTable, clickListener: CartItemListener) {
+            binding.cartItem = item
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -43,8 +42,11 @@ class CartListAdapter: ListAdapter<CartTable, CartListAdapter.ViewHolder>(CartLi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
+        holder.bind(getItem(position)!!, clickListener)
+    }
+
+    class CartItemListener(val clickListener: (cartId: String) -> Unit) {
+        fun onClick(cartItem: CartTable) = clickListener(cartItem.url)
     }
 
 }

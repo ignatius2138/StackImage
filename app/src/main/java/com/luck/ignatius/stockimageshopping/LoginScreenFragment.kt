@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.luck.ignatius.stockimageshopping.databinding.FragmentLoginBinding
 
 class LoginScreenFragment: Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentLoginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)
@@ -21,14 +22,20 @@ class LoginScreenFragment: Fragment() {
             if (email != "" || password != "") {
                 if (email == sharedPreferences!!.getString("$email+loginEmail", "loh")) {
                     if (password == sharedPreferences.getString("$email+loginPassword", "loh")) {
-                        Toast.makeText(context, "Logged in :)))", Toast.LENGTH_LONG).show()
+
+                        findNavController().navigate(LoginScreenFragmentDirections.actionLogInFragmentToCartFragment(email))
+                        val editor = sharedPreferences.edit()
+                        editor.putString("accountName", email)
+                        editor.putString("isLoggedIn", "true")
+                        editor.apply()
+                        Toast.makeText(context, "$email logged in :)))", Toast.LENGTH_LONG).show()
                     } else Toast.makeText(context, "Error! Wrong email or password", Toast.LENGTH_LONG).show()
                 } else Toast.makeText(context, "Error! Wrong email or password", Toast.LENGTH_LONG).show()
             } else Toast.makeText(context, "Enter all fields", Toast.LENGTH_LONG).show()
         }
 
         binding.toRegisterScreenButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginScreenFragment_to_registerScreenFragment)
+            findNavController().navigate(R.id.action_logInFragment_to_registerScreenFragment)
         }
 
         return binding.root

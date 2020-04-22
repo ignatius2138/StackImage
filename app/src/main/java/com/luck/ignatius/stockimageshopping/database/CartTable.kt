@@ -11,5 +11,10 @@ data class CartTable(
     @ColumnInfo
     var price: Int = -1,
     @ColumnInfo
-    var description: String = "empty description") {
+    var description: String = "empty description",
+    @ColumnInfo
+    var accountName: String = "Not logged in") {
+    @ColumnInfo
+    var itemStatus: String = "cart"
+
 }

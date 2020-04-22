@@ -7,6 +7,9 @@
         <variable
             name="cartItem"
             type="com.luck.ignatius.stockimageshopping.database.CartTable" />
+        <variable
+            name="clickListener"
+            type="com.luck.ignatius.stockimageshopping.cart.CartListAdapter.CartItemListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -24,8 +27,8 @@
 
             <ImageView
                 android:id="@+id/cartItemImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="87dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
@@ -33,7 +36,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_connection_error"
+                app:imageUrl="@{cartItem.url}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -44,6 +47,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:textSize="12sp"
+                android:text="@{cartItem.description}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cartItemImageView"
                 app:layout_constraintTop_toTopOf="parent"
@@ -55,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="4dp"
+                android:text="@{`Price is: ` + cartItem.price + ` $`}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cartItemImageView"
                 app:layout_constraintTop_toTopOf="@+id/deleteButton"
@@ -67,7 +72,8 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginBottom="4dp"
-                android:text="Delete Item"
+                android:text="@string/delete_item_button_text"
+                android:onClick="@{() -> clickListener.onClick(cartItem)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/descriptionTextViewRecycler"

@@ -33,7 +33,7 @@ class RegisterScreenFragment: Fragment(){
                     editor.putString("$email+loginPassword", password)
                     editor.apply()
                     Toast.makeText(activity, "Thanks for registration. You can now Log In", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.action_registerScreenFragment_to_loginScreenFragment)
+                    findNavController().navigate(R.id.action_registerScreenFragment_to_logInFragment)
                 } else Toast.makeText(activity, "Error! Passwords don't match", Toast.LENGTH_LONG).show()
             } else Toast.makeText(activity, "Error! Empty fields", Toast.LENGTH_LONG).show()
         }
