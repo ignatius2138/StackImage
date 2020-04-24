@@ -7,4 +7,5 @@
     <string name="add_to_cart_text">Add to cart</string>
     <string name="snackbar_item_added_to_cart">Item added to cart</string>
     <string name="delete_item_button_text">Delete Item</string>
+    <string name="buy_button_text">Buy</string>
 </resources>

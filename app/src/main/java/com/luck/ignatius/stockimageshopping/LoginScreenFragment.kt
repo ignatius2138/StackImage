@@ -26,7 +26,7 @@ class LoginScreenFragment: Fragment() {
                         findNavController().navigate(LoginScreenFragmentDirections.actionLogInFragmentToCartFragment(email))
                         val editor = sharedPreferences.edit()
                         editor.putString("accountName", email)
-                        editor.putString("isLoggedIn", "true")
+                        editor.putBoolean("isLoggedIn", true)
                         editor.apply()
                         Toast.makeText(context, "$email logged in :)))", Toast.LENGTH_LONG).show()
                     } else Toast.makeText(context, "Error! Wrong email or password", Toast.LENGTH_LONG).show()

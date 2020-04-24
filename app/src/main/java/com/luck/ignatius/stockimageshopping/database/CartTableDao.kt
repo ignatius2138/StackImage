@@ -1,7 +1,6 @@
 package com.luck.ignatius.stockimageshopping.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Dao
@@ -15,8 +14,8 @@ interface CartTableDao {
     @Query("SELECT * FROM cart_contents")
     fun getAllCartItems(): LiveData<List<CartTable>>
 
-    @Query("SELECT * FROM cart_contents WHERE itemStatus = :itemStatus")
-    fun getCartItemsByStatus(itemStatus: String): LiveData<List<CartTable>>
+    @Query("SELECT * FROM cart_contents WHERE itemStatus = :itemStatus AND accountName = :accountName")
+    fun getCartItemsByStatusAndAccount(itemStatus: String, accountName: String): LiveData<List<CartTable>>
 
     @Query("DELETE FROM cart_contents WHERE url = :cartItemId")
     fun deleteItemById(cartItemId: String)
@@ -24,6 +23,6 @@ interface CartTableDao {
     @Query("UPDATE cart_contents SET itemStatus = :newStatus")
     fun updateStatus(newStatus: String)
 
-    @Query("UPDATE cart_contents SET accountName = :accountName")
-    fun updateAccount(accountName: String)
+    @Query("UPDATE cart_contents SET accountName = :accountName WHERE itemStatus = :itemStatus")
+    fun updateAccount(accountName: String, itemStatus: String)
 }

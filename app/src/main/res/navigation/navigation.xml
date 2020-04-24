@@ -28,8 +28,8 @@
         <action
             android:id="@+id/action_logInFragment_to_cartFragment"
             app:destination="@id/cartFragment"
-            app:popUpTo="@id/cartFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/mainScreenFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/registerScreenFragment"
@@ -43,7 +43,7 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/logInFragment"
+            app:popUpTo="@id/cartFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -63,5 +63,8 @@
         <argument
             android:name="email"
             app:argType="string" />
+        <action
+            android:id="@+id/action_cartFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
     </fragment>
 </navigation>
