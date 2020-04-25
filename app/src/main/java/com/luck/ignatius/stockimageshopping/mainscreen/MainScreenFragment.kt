@@ -2,9 +2,8 @@ package com.luck.ignatius.stockimageshopping.mainscreen
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,10 +25,37 @@ class MainScreenFragment: Fragment()  {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         val navigationView = binding.navigationView
+
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.app_bar_search -> {
-                    Toast.makeText(context, "drawer clicked", Toast.LENGTH_LONG).show()
+                R.id.allImagesMenu -> {
+                    viewModel.imageType = null
+                    viewModel.updateRecyclerView()
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.photosMenu -> {
+                    viewModel.imageType = "photo"
+                    viewModel.updateRecyclerView()
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.vectorGraphicMenu -> {
+                    viewModel.imageType = "vector"
+                    viewModel.updateRecyclerView()
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.anyOrientationMenu -> {
+                    viewModel.orientation = null
+                    viewModel.updateRecyclerView()
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.horizontalMenu -> {
+                    viewModel.orientation = "horizontal"
+                    viewModel.updateRecyclerView()
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.verticalMenu -> {
+                    viewModel.orientation = "vertical"
+                    viewModel.updateRecyclerView()
                     return@setNavigationItemSelectedListener true
                 }
                 else -> {return@setNavigationItemSelectedListener true}
@@ -50,13 +76,30 @@ class MainScreenFragment: Fragment()  {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu,menu)
+        val searchItem = menu.findItem(R.id.app_bar_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                viewModel.query = p0
+                viewModel.updateRecyclerView()
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return false
+            }
+        })
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController()
-        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
-    }
-
-
+        when (item.itemId) {
+            R.id.cartFragment -> {
+                val navController = findNavController()
+                return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+        }
 
 }

@@ -15,6 +15,10 @@ enum class StackPhotoApiStatus {LOADING, ERROR, DONE}
 class MainScreenViewModel: ViewModel(){
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    var query: String? = null
+    var imageType: String? = null
+    var orientation: String? = null
+    var sort: String? = "newest"
 
     private val _status = MutableLiveData<StackPhotoApiStatus>()
     val status: LiveData<StackPhotoApiStatus>
@@ -29,12 +33,12 @@ class MainScreenViewModel: ViewModel(){
         get() = _navigateToSelectedImage
 
     init {
-        getImages()
+        updateRecyclerView()
     }
 
-    private fun getImages() {
+    fun updateRecyclerView() {
         coroutineScope.launch {
-            val getImagesDeferred = StackPhotoApi.retrofitService.getImages()
+            val getImagesDeferred = StackPhotoApi.retrofitService.getImages(query, imageType, orientation, sort)
             try {
                 _status.value = StackPhotoApiStatus.LOADING
                 val result = getImagesDeferred.await()

@@ -1,5 +1,6 @@
 package com.luck.ignatius.stockimageshopping.network
 
+import android.graphics.drawable.GradientDrawable
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -7,10 +8,8 @@ import kotlinx.coroutines.Deferred
 import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -26,13 +25,13 @@ val client: OkHttpClient =  OkHttpClient.Builder()
 private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .client(client)
-    .addConverterFactory(MoshiConverterFactory.create())
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .build()
 
 interface StackPhotoApiService {
-    @GET("images/search?sort=random")
-    fun getImages(): Deferred<Image>
+    @GET("images/search")
+    fun getImages(@Query("query") queryType:String?, @Query("image_type") imageType:String?, @Query("orientation") orientationType: String?, @Query("sort") sort: String?): Deferred<Image>
 }
 
 object StackPhotoApi {
