@@ -6,4 +6,40 @@
         android:id="@+id/app_bar_search"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView" />
+    <item
+        android:id="@+id/imageTypeMenu"
+        android:title="Image Type" >
+        <menu >
+            <item
+                android:id="@+id/allImagesMenu"
+                android:checkable="true"
+                android:title="All Images" />
+            <item
+                android:id="@+id/photosMenu"
+                android:checkable="true"
+                android:title="Photos" />
+            <item
+                android:id="@+id/vectorGraphicMenu"
+                android:checkable="true"
+                android:title="Vector Graphic" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/orientationMenu"
+        android:title="Orientation" >
+        <menu >
+            <item
+                android:id="@+id/anyOrientationMenu"
+                android:checkable="true"
+                android:title="Any orientation" />
+            <item
+                android:id="@+id/verticalMenu"
+                android:checkable="true"
+                android:title="Vertical" />
+            <item
+                android:id="@+id/horizontalMenu"
+                android:checkable="true"
+                android:title="Horizontal" />
+        </menu>
+    </item>
 </menu>

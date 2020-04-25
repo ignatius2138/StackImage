@@ -10,11 +10,6 @@
             type="com.luck.ignatius.stockimageshopping.mainscreen.MainScreenViewModel" />
     </data>
 
-    <!--<androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/dark_gray"
-        tools:context="com.luck.ignatius.stockimageshopping.MainActivity">-->
         <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawerLayout"
             android:layout_width="match_parent"
@@ -52,10 +47,10 @@
             app:stackPhotoApiStatus="@{viewModel.status}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             app:menu="@menu/drawer_menu"/>
     </androidx.drawerlayout.widget.DrawerLayout>
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 </layout>

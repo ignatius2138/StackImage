@@ -2,6 +2,7 @@ package com.luck.ignatius.stockimageshopping.mainscreen
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -13,7 +14,7 @@ import com.luck.ignatius.stockimageshopping.R
 import com.luck.ignatius.stockimageshopping.databinding.FragmentMainScreenBinding
 import com.luck.ignatius.stockimageshopping.mainscreen.MainScreenFragmentDirections.*
 
-class MainScreenFragment: Fragment() {
+class MainScreenFragment: Fragment()  {
 
     private val viewModel: MainScreenViewModel by lazy {
         ViewModelProvider(this).get(MainScreenViewModel::class.java)
@@ -24,6 +25,16 @@ class MainScreenFragment: Fragment() {
             R.layout.fragment_main_screen, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        val navigationView = binding.navigationView
+        navigationView.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.app_bar_search -> {
+                    Toast.makeText(context, "drawer clicked", Toast.LENGTH_LONG).show()
+                    return@setNavigationItemSelectedListener true
+                }
+                else -> {return@setNavigationItemSelectedListener true}
+            }
+        }
         binding.imagesGrid.adapter = ImageGridAdapter(ImageGridAdapter.OnClickListener{
             viewModel.displayImageDetails(it)
         })
@@ -45,5 +56,7 @@ class MainScreenFragment: Fragment() {
         val navController = findNavController()
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
+
+
 
 }
