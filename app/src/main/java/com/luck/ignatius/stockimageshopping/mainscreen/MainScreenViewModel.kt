@@ -19,12 +19,13 @@ enum class StackPhotoApiStatus {LOADING, ERROR, DONE}
 class MainScreenViewModel(application: Application) : AndroidViewModel(application){
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-    private val database = StackImageDatabase.DatabaseObject.getInstance(application)
+    private val database = StackImageDatabase.getInstance(application)
     private val imageRepository = ImageRepository(database)
     var query: String? = null
     var imageType: String? = null
     var orientation: String? = null
-    var sort: String? = "newest"
+    private var sort: String? = "popular"
+    private var perPage: Int? = 50
 
     private val _status = MutableLiveData<StackPhotoApiStatus>()
     val status: LiveData<StackPhotoApiStatus>
@@ -44,7 +45,7 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
 
     fun updateRecyclerView() {
         coroutineScope.launch {
-            val getImagesDeferred = StackPhotoApi.retrofitService.getImages(query, imageType, orientation, sort)
+            val getImagesDeferred = StackPhotoApi.retrofitService.getImages(query, imageType, orientation, sort, perPage)
             try {
                 _status.value = StackPhotoApiStatus.LOADING
                 val result = getImagesDeferred.await()

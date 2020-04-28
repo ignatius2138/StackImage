@@ -17,7 +17,7 @@ class ImageRepository(private val database: StackImageDatabase) {
 
     suspend fun refreshImages() {
         withContext(Dispatchers.IO) {
-            val imagesFeed = StackPhotoApi.retrofitService.getImages(null, null, null, "newest").await()
+            val imagesFeed = StackPhotoApi.retrofitService.getImages(null, null, null, "newest", null).await()
             database.databaseImageTableDao.insertAll(imagesFeed.asDatabaseImage())
         }
     }

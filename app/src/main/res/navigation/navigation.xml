@@ -43,8 +43,8 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/cartFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/mainScreenFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/detailsScreenFragment"

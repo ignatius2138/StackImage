@@ -9,15 +9,18 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.luck.ignatius.stockimageshopping.R
 import com.luck.ignatius.stockimageshopping.database.StackImageDatabase
 import com.luck.ignatius.stockimageshopping.databinding.FragmentCartBinding
 
 class CartFragment: Fragment() {
     lateinit var cartViewModel: CartViewModel
+    lateinit var binding: FragmentCartBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentCartBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false)
         val application = requireNotNull(this.activity).application
         val dataSource = StackImageDatabase.getInstance(application).cartTableDao
         val viewModelFactory = CartViewModelFactory(dataSource, application)
@@ -59,6 +62,7 @@ class CartFragment: Fragment() {
             R.id.showHistoryManuItem -> {
                 if (::cartViewModel.isInitialized) {
                     cartViewModel.showPurchaseHistory()
+                    binding.buyButton.visibility = View.GONE
                 }
                 true
             }
@@ -71,6 +75,7 @@ class CartFragment: Fragment() {
             R.id.showCartMenuItem -> {
                 if (::cartViewModel.isInitialized) {
                     cartViewModel.showCart()
+                    binding.buyButton.visibility = View.VISIBLE
                 }
                 true
             }

@@ -3,6 +3,7 @@ package com.luck.ignatius.stockimageshopping.cart
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.luck.ignatius.stockimageshopping.database.CartTable

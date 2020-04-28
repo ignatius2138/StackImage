@@ -2,6 +2,7 @@ package com.luck.ignatius.stockimageshopping.mainscreen
 
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -12,7 +13,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.google.android.material.navigation.NavigationView
 import com.luck.ignatius.stockimageshopping.R
 import com.luck.ignatius.stockimageshopping.databinding.FragmentMainScreenBinding
-import com.luck.ignatius.stockimageshopping.mainscreen.MainScreenFragmentDirections.*
+import com.luck.ignatius.stockimageshopping.mainscreen.MainScreenFragmentDirections.actionMainScreenFragmentToDetailsScreenFragment
 
 class MainScreenFragment: Fragment()  {
 
@@ -22,11 +23,9 @@ class MainScreenFragment: Fragment()  {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //val application = requireNotNull(activity).application
         val binding: FragmentMainScreenBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_main_screen, container, false)
         binding.lifecycleOwner = this
-        //val viewModelFactory = MainScreenViewModelFactory(application)
         binding.viewModel = viewModel
         val navigationView = binding.navigationView
         filterSearchResults(navigationView)
@@ -90,6 +89,8 @@ class MainScreenFragment: Fragment()  {
         inflater.inflate(R.menu.menu,menu)
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as SearchView
+        searchView.imeOptions = searchView.imeOptions or EditorInfo.IME_FLAG_NO_EXTRACT_UI
+        searchView.maxWidth = Integer.MAX_VALUE
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 viewModel.query = p0

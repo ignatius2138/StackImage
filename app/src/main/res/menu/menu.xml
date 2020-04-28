@@ -9,6 +9,7 @@
         app:actionViewClass="android.widget.SearchView" />
     <item
         android:id="@+id/cartFragment"
-        android:title="Cart"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:icon="@drawable/white_cart_24dp"
+        android:title="Cart" />
 </menu>

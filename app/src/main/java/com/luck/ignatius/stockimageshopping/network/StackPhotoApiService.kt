@@ -30,7 +30,11 @@ private val retrofit = Retrofit.Builder()
 
 interface StackPhotoApiService {
     @GET("images/search")
-    fun getImages(@Query("query") queryType:String?, @Query("image_type") imageType:String?, @Query("orientation") orientationType: String?, @Query("sort") sort: String?): Deferred<NetworkImage>
+    fun getImages(@Query("query") queryType:String?,
+                  @Query("image_type") imageType:String?,
+                  @Query("orientation") orientationType: String?,
+                  @Query("sort") sort: String?,
+                  @Query("per_page") perPage: Int?): Deferred<NetworkImage>
 }
 
 object StackPhotoApi {
