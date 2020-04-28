@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [CartTable::class], version = 1, exportSchema = false)
+@Database(entities = [CartTable::class, DatabaseImage::class], version = 1, exportSchema = false)
 abstract class StackImageDatabase: RoomDatabase() {
     abstract val cartTableDao: CartTableDao
+    abstract val databaseImageTableDao: DatabaseImageTableDao
 
     companion object{
         @Volatile

@@ -1,9 +1,11 @@
 package com.luck.ignatius.stockimageshopping.network
 
 import android.os.Parcelable
+import com.luck.ignatius.stockimageshopping.database.DatabaseImage
+import com.luck.ignatius.stockimageshopping.domain.ModelImage
 import kotlinx.android.parcel.Parcelize
 
-data class Image(
+data class NetworkImage(
     val `data`: List<Data>,
     val page: Int,
     val per_page: Int,
@@ -79,3 +81,15 @@ data class SmallThumb(
     val url: String,
     val width: Int
 ) : Parcelable
+
+fun NetworkImage.asModelImage(): List<ModelImage> {
+    return data.map {
+        ModelImage(hugeThumbUrl = it.assets.huge_thumb.url, description = it.description, id = it.id, imageType = it.image_type)
+    }
+}
+
+fun NetworkImage.asDatabaseImage(): List<DatabaseImage> {
+    return data.map {
+        DatabaseImage(hugeThumbUrl = it.assets.huge_thumb.url, description = it.description, id = it.id, imageType = it.image_type)
+    }
+}

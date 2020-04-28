@@ -1,6 +1,5 @@
 package com.luck.ignatius.stockimageshopping.network
 
-import android.graphics.drawable.GradientDrawable
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -31,7 +30,7 @@ private val retrofit = Retrofit.Builder()
 
 interface StackPhotoApiService {
     @GET("images/search")
-    fun getImages(@Query("query") queryType:String?, @Query("image_type") imageType:String?, @Query("orientation") orientationType: String?, @Query("sort") sort: String?): Deferred<Image>
+    fun getImages(@Query("query") queryType:String?, @Query("image_type") imageType:String?, @Query("orientation") orientationType: String?, @Query("sort") sort: String?): Deferred<NetworkImage>
 }
 
 object StackPhotoApi {
