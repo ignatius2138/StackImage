@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
+import com.google.android.material.navigation.NavigationView
 import com.luck.ignatius.stockimageshopping.R
 import com.luck.ignatius.stockimageshopping.databinding.FragmentMainScreenBinding
 import com.luck.ignatius.stockimageshopping.mainscreen.MainScreenFragmentDirections.*
@@ -16,18 +17,38 @@ import com.luck.ignatius.stockimageshopping.mainscreen.MainScreenFragmentDirecti
 class MainScreenFragment: Fragment()  {
 
     private val viewModel: MainScreenViewModel by lazy {
-        ViewModelProvider(this).get(MainScreenViewModel::class.java)
+        val activity = requireNotNull(this.activity)
+        ViewModelProvider(this,MainScreenViewModelFactory(activity.application)).get(MainScreenViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        //val application = requireNotNull(activity).application
         val binding: FragmentMainScreenBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_main_screen, container, false)
         binding.lifecycleOwner = this
+        //val viewModelFactory = MainScreenViewModelFactory(application)
         binding.viewModel = viewModel
         val navigationView = binding.navigationView
+        filterSearchResults(navigationView)
 
+        binding.imagesGrid.adapter = ImageGridAdapter(ImageGridAdapter.OnClickListener{
+            viewModel.displayImageDetails(it)
+        })
+
+        viewModel.navigateToSelectedImage.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                findNavController().navigate(actionMainScreenFragmentToDetailsScreenFragment(it))
+                viewModel.displayImageDetailsComplete()
+            }
+        })
+
+        setHasOptionsMenu(true)
+        return binding.root
+    }
+
+    private fun filterSearchResults(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.allImagesMenu -> {
                     viewModel.imageType = null
                     viewModel.updateRecyclerView()
@@ -58,20 +79,11 @@ class MainScreenFragment: Fragment()  {
                     viewModel.updateRecyclerView()
                     return@setNavigationItemSelectedListener true
                 }
-                else -> {return@setNavigationItemSelectedListener true}
+                else -> {
+                    return@setNavigationItemSelectedListener true
+                }
             }
         }
-        binding.imagesGrid.adapter = ImageGridAdapter(ImageGridAdapter.OnClickListener{
-            viewModel.displayImageDetails(it)
-        })
-        viewModel.navigateToSelectedImage.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                findNavController().navigate(actionMainScreenFragmentToDetailsScreenFragment(it))
-                viewModel.displayImageDetailsComplete()
-            }
-        })
-        setHasOptionsMenu(true)
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -101,5 +113,4 @@ class MainScreenFragment: Fragment()  {
         }
         return super.onOptionsItemSelected(item)
         }
-
 }

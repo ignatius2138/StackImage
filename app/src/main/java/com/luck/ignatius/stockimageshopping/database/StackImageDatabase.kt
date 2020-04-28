@@ -10,7 +10,7 @@ abstract class StackImageDatabase: RoomDatabase() {
     abstract val cartTableDao: CartTableDao
     abstract val databaseImageTableDao: DatabaseImageTableDao
 
-    companion object{
+    companion object DatabaseObject{
         @Volatile
         private var INSTANCE: StackImageDatabase? = null
         fun getInstance(context: Context): StackImageDatabase{

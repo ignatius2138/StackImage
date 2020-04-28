@@ -1,10 +1,14 @@
 package com.luck.ignatius.stockimageshopping.mainscreen
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.luck.ignatius.stockimageshopping.database.StackImageDatabase
 import com.luck.ignatius.stockimageshopping.network.*
+import com.luck.ignatius.stockimageshopping.repository.ImageRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -12,9 +16,11 @@ import kotlinx.coroutines.launch
 
 enum class StackPhotoApiStatus {LOADING, ERROR, DONE}
 
-class MainScreenViewModel: ViewModel(){
+class MainScreenViewModel(application: Application) : AndroidViewModel(application){
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private val database = StackImageDatabase.DatabaseObject.getInstance(application)
+    private val imageRepository = ImageRepository(database)
     var query: String? = null
     var imageType: String? = null
     var orientation: String? = null
