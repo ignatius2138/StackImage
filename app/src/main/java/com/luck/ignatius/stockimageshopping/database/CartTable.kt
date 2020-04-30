@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "cart_contents")
 data class CartTable(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    var itemId: Long = 0L,
+    @ColumnInfo
     var url: String = "empty Url",
     @ColumnInfo
     var price: Int = -1,

@@ -3,6 +3,7 @@ package com.luck.ignatius.stockimageshopping.detailesscreen
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,9 +31,19 @@ class DetailsScreenViewModel(val data: Data, app: Application, private val dataS
 
     fun addItemToCart() {
         uiScope.launch {
-            val newCartItem = CartTable(url = data.assets.huge_thumb.url, description = data.description, price = data.id.toInt()/100000000, accountName = sharedPreferences.getString("accountName", "not logged in")!!)
-            insert(newCartItem)
-            _showSnackbarEvent.value = true
+            withContext(Dispatchers.IO) {
+                if (dataSource.checkIfImageAlreadyExists(data.assets.huge_thumb.url, sharedPreferences.getString("accountName", "not logged in")!!) == 0) {
+                    val newCartItem = CartTable(url = data.assets.huge_thumb.url, description = data.description, price = data.id.toInt()/100000000, accountName = sharedPreferences.getString("accountName", "not logged in")!!)
+                    insert(newCartItem)
+                    withContext(Dispatchers.Main) {
+                        _showSnackbarEvent.value = true
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(getApplication(), "Image already in a cart or bought", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
 
