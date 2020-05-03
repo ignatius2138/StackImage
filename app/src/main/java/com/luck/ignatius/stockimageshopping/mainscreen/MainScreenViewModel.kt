@@ -21,7 +21,7 @@ class MainScreenViewModel(application: Application) : AndroidViewModel(applicati
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val database = StackImageDatabase.getInstance(application)
     private val imageRepository = ImageRepository(database)
-    var query: String? = null
+    var query: String? = "cat"
     var imageType: String? = null
     var orientation: String? = null
     private var sort: String? = "popular"
