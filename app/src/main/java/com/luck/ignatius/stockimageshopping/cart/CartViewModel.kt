@@ -2,6 +2,7 @@ package com.luck.ignatius.stockimageshopping.cart
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -32,7 +33,6 @@ class CartViewModel(val database: CartTableDao, application: Application): Andro
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
 
     fun onCartItemClicked(cartItemId: String){
         uiScope.launch {
